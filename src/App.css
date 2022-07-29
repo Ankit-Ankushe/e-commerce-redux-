@@ -36,3 +36,36 @@
     transform: rotate(360deg);
   }
 }
+.product_container{
+  display: flex;
+  gap: 20px;
+  flex-direction: column;
+  align-items: center;
+}
+.product_card{
+  width: 500px;
+  color: red;
+  border: 1px solid black;
+  padding: 10px;
+}
+.product_card>img{
+  width: 100%;
+  height: 200px;
+}
+.priceTag{
+  display: flex;
+  justify-content: space-around;
+}
+.buttonsDiv{
+  display: flex;
+  justify-content: space-around;
+  gap: 300px;
+}
+.buttonsDiv>div{
+  color: white;
+  padding: 10px;
+  background-color: #282c34;
+}
+.buttonsDiv>div>button{
+  margin-left: 20px;
+}
