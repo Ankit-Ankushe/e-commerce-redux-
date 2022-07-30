@@ -69,3 +69,19 @@
 .buttonsDiv>div>button{
   margin-left: 20px;
 }
+.cartdata{
+  width: 700px;
+  display: flex;
+  flex-direction: row;
+  margin: 20px auto;
+  justify-content: space-around;
+  gap: 30px;
+  border: 1px solid #cecece;
+  text-align: left;
+}
+.cartdata>div>p{
+  color: red;
+}
+.cartdata>div>h3{
+  color: green;
+}

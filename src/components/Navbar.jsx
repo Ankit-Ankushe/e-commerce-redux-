@@ -54,7 +54,7 @@ const list = () => (
     onKeyDown={() => toggleDrawer(false)}
   >
     <List>
-      {['Home', 'Grocery', 'Pharmacy'].map((text, index) => (
+      {['Home', 'Grocery', 'Pharmacy','CartData'].map((text, index) => (
         <ListItem key={text} disablePadding>
           <ListItemButton onClick={() => pageChange(text)}>
             <ListItemIcon>

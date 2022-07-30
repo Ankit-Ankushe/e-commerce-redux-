@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Grocery from './components/Grocery';
 import Pharmacy from './components/Pharmacy';
 import ProductDetail from './components/ProductDetail';
+import CartData from './components/CartData';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/grocery' element={<Grocery/>}></Route>
         <Route path='/pharmacy' element={<Pharmacy/>}></Route>
         <Route path='/:id' element={<ProductDetail/>}></Route>
+        <Route path='/cartdata' element={<CartData/>}></Route>
       </Routes>
     </div>
   );
