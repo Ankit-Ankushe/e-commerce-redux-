@@ -42,6 +42,9 @@ export default function ButtonAppBar() {
     navigate('/')
   }
   const pageChange = (text) => {
+    if(text == "Home"){
+      return navigate(`/`)
+    }
     const newText = text.toLowerCase()
     navigate(`/${newText}`)
 }
@@ -54,7 +57,7 @@ const list = () => (
     onKeyDown={() => toggleDrawer(false)}
   >
     <List>
-      {['Home', 'Grocery', 'Pharmacy','CartData'].map((text, index) => (
+      {['Home', 'Grocery', 'Pharmacy','CartData','History'].map((text, index) => (
         <ListItem key={text} disablePadding>
           <ListItemButton onClick={() => pageChange(text)}>
             <ListItemIcon>

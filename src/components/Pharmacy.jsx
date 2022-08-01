@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 
 
@@ -65,7 +66,7 @@ const [data, setData] = useState([])
               <h3>Rs {el.price}</h3>
               <h3 style={{ color: "green", backgroundColor: "pink", padding: "10px" }}>{el.rating}</h3>
             </div>
-            <Button variant="contained">view</Button>
+            <Link to={`/${el.id}`} ><Button variant="contained">view</Button></Link>
           </div>
         ))
       }

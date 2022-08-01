@@ -1,10 +1,13 @@
 import { Button } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 
 const CartData = () => {
     const [data, setData] = useState([])
+
+    const navigate = useNavigate()
     useEffect(() => {
         handleFetch()
     }, [])
@@ -15,14 +18,12 @@ const CartData = () => {
             .catch((err) => console.log(err))
     }
     const handleDelete = (id) => {
-        // fetch(`http://localhost:8080/cartData?id=${id}`,{
-        //     method:"DELETE"
-        // })
-        // .then((res) => res.json())
-        // .then((res) => console.log("res" , res))
-        // .catch((err) => console.log(err))
-        const newData = data.filter((el) => el.id !== id)
-        setData(newData)
+        fetch(`http://localhost:8080/cartData/${id}`, {
+            method: "DELETE"
+        })
+            .then((res) => res.json())
+            .then((res) => { handleFetch() })
+            .catch((err) => console.log(err))
     }
     let totPrice = 0
     const totalPrice = () => {
@@ -32,12 +33,50 @@ const CartData = () => {
         return totPrice
     }
     totalPrice()
+
+
+
+    // handle checkout 
+    const handleCheckout = (data) => {
+        let currentDate = new Date();
+        let cDay = currentDate.getDate();
+        let cMonth = currentDate.getMonth() + 1;
+        let cYear = currentDate.getFullYear();
+        const date = cDay + "/" + cMonth + "/" + cYear
+        const time = currentDate.getHours() + ":" + currentDate.getMinutes() + ":" + currentDate.getSeconds();
+        let arr = []
+        for (var i = 0; i < data.length; i++) {
+           let  obj={
+                date,
+                time,
+                title:data[i].data.title,
+                count:data[i].count,
+                price:data[i].data.price
+            }
+          arr.push(obj)
+        }
+        const newData = {
+           data:arr
+        }
+
+        fetch(`http://localhost:8080/history`, {
+            method: "POST",
+            body: JSON.stringify(newData),
+            headers: {
+                "content-Type": "application/json"
+            }
+        }).then((res) => res.json())
+            .then((res) => navigate('/success'))
+            .catch((err) => console.log(err))
+
+
+    }
     return (
         <div>
             <h1>Cart Items</h1>
             {
                 data.map((el) => (
-                    <div className='cartdata'>
+                    <div key={el.id} className='cartdata'>
                         <div>
                             <h2>{el.data.title}</h2>
                             <p>{el.data.price}</p>
@@ -48,13 +87,13 @@ const CartData = () => {
                         <div>
                             <h3>Rs.{el.data.price * el.count}</h3>
                         </div>
-                        
+
                         <Button onClick={() => handleDelete(el.id)} ><DeleteIcon /></Button>
                     </div>
                 ))
             }
-            <h3>Total Price : Rs.{totPrice }</h3>
-            <Button variant="contained"  >Checkout</Button>
+            <h3>Total Price : Rs.{totPrice}</h3>
+            <Button variant="contained" onClick={() => handleCheckout(data)}  >Checkout</Button>
         </div>
     )
 }

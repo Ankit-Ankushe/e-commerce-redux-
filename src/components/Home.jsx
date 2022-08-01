@@ -4,6 +4,7 @@ import { Button } from '@mui/material'
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import {Link} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 
 const Home = () => {
@@ -11,14 +12,14 @@ const Home = () => {
   const [sort, setSort] = useState(null)
   const [page,setPage] = useState(1)
   const [filter,setFilter] = useState("")
-console.log("sort",sort,"filter",filter)
+  const token = useSelector(state => state.auth.token)
+  console.log(token)
 
   useEffect(() => {
     handleFetch()
   },[page,sort,filter])
 
   // fetch data
-  console.log("data", data)
   const handleFetch = () => {
     if(sort||filter){
         fetch(`http://localhost:8080/products?_page=${page}&_sort=price&_order=${sort}&rating_like<${filter+1}&rating_like=${filter}`)

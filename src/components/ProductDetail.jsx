@@ -39,7 +39,7 @@ const ProductDetail = () => {
         "content-Type": "application/json"
       }
     }).then((res) => res.json())
-      .then((res) => console.log(res))
+      .then((res) => alert("added successfully"))
       .catch((err) => console.log(err))
   }
   return (
